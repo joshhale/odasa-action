@@ -1,6 +1,12 @@
 name: 'Build snapshot'
 description: 'Build a QL snapshot'
 inputs:
+  odasa:
+    description: 'URL of odasa.zip'
+    required: true
+  license:
+    description: 'URL of license.dat'
+    required: true
   language:
     description: 'Language to analyze'
     required: true
@@ -11,6 +17,6 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ secrets.ODASA_URL }}
-    - ${{ secrets.ODASA_LICENSE }}
+    - ${{ inputs.ODASA_URL }}
+    - ${{ inputs.ODASA_LICENSE }}
     - ${{ inputs.language }}
