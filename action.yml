@@ -1,0 +1,16 @@
+name: 'Build snapshot'
+description: 'Build a QL snapshot'
+inputs:
+  language:
+    description: 'Language to analyze'
+    required: true
+outputs:
+  snapshot:
+    description: 'The snapshot folder'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ secrets.ODASA_URL }}
+    - ${{ secrets.ODASA_LICENSE }}
+    - ${{ inputs.language }}
