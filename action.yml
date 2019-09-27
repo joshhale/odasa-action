@@ -17,6 +17,6 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.ODASA_URL }}
-    - ${{ inputs.ODASA_LICENSE }}
+    - ${{ inputs.odasa }}
+    - ${{ inputs.license }}
     - ${{ inputs.language }}
