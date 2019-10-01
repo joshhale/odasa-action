@@ -21,7 +21,7 @@ export SEMMLE_JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk
 
 /bin/mkdir "${WORK}/${PROJECT_NAME}"
 
-/usr/bin/java -jar "${WORK}/odasa/tools/lgtm-buildtools/lgtmbuild.jar" "${WORK}/odasa/tools/lgtm-buildtools" "${WORK}/${PROJECT_NAME}" "$SOURCE_LOCATION" "${LANGUAGE}"
+/usr/bin/java -jar "${WORK}/odasa/tools/lgtm-buildtools/lgtmbuild.jar" "${WORK}/odasa/tools/lgtm-buildtools" "${WORK}/${PROJECT_NAME}" `pwd` "${LANGUAGE}"
 
 "${WORK}/odasa/tools/odasa" addSnapshot --source-location "$SOURCE_LOCATION" --latest --name "rev-${GITHUB_SHA}" --project "${WORK}/${PROJECT_NAME}"
 "${WORK}/odasa/tools/odasa" buildSnapshot --latest --project "${WORK}/${PROJECT_NAME}" --fail-early --ignore-errors
