@@ -13,6 +13,7 @@ chmod +x "${WORK}"
 
 /usr/bin/wget -O "${WORK}/odasa.zip" "${ODASA_URL}"
 /usr/bin/wget -O "${WORK}/license.dat" "${ODASA_LICENSE}"
+cat "${WORK}/license.dat"
 
 /usr/bin/unzip -q "${WORK}/odasa.zip" -d "${WORK}"
 
