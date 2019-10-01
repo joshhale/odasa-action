@@ -21,11 +21,14 @@ export SEMMLE_JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk
 
 /bin/mkdir "${WORK}/${PROJECT_NAME}"
 
-/usr/bin/java -jar "${WORK}/odasa/tools/lgtm-buildtools/lgtmbuild.jar" "${WORK}/odasa/tools/lgtm-buildtools" "${WORK}/${PROJECT_NAME}" `pwd` "${LANGUAGE}"
+/usr/bin/java -jar "${WORK}/odasa/tools/lgtm-buildtools/lgtmbuild.jar" "${WORK}/odasa/tools/lgtm-buildtools" "${WORK}/${PROJECT_NAME}" "$SOURCE_LOCATION" "${LANGUAGE}"
 
-"${WORK}/odasa/tools/odasa" addSnapshot --source-location "$SOURCE_LOCATION" --latest --name "rev-${GITHUB_SHA}" --project "${WORK}/${PROJECT_NAME}"
-"${WORK}/odasa/tools/odasa" buildSnapshot --latest --project "${WORK}/${PROJECT_NAME}" --fail-early --ignore-errors
-"${WORK}/odasa/tools/odasa" export --latest --project "${WORK}/${PROJECT_NAME}" --output "${WORK}/${PROJECT_NAME}.zip" --keep-cached
+# This should really be obtained from the source repo
+SNAP_NAME="rev-${GITHUB_SHA}"
+
+"${WORK}/odasa/tools/odasa" addSnapshot --source-location "$SOURCE_LOCATION" --date now --name "$SNAP_NAME" --project "${WORK}/${PROJECT_NAME}"
+"${WORK}/odasa/tools/odasa" buildSnapshot --project "${WORK}/${PROJECT_NAME}" --fail-early --ignore-errors "$SNAP_NAME"
+"${WORK}/odasa/tools/odasa" export --project "${WORK}/${PROJECT_NAME}" --output "${WORK}/${PROJECT_NAME}.zip" --keep-cached "$SNAP_NAME"
 
 rm -rf "${WORK}/${PROJECT_NAME}"
 /usr/bin/unzip -q -d "${WORK}" "${WORK}/${PROJECT_NAME}.zip"
