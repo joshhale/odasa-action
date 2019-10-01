@@ -13,7 +13,6 @@ chmod +x "${WORK}"
 
 /usr/bin/wget -O "${WORK}/odasa.zip" "${ODASA_URL}"
 /usr/bin/wget -O "${WORK}/license.dat" "${ODASA_LICENSE}"
-cat "${WORK}/license.dat"
 
 /usr/bin/unzip -q "${WORK}/odasa.zip" -d "${WORK}"
 
@@ -22,7 +21,7 @@ export SEMMLE_JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk
 
 /bin/mkdir "${WORK}/${PROJECT_NAME}"
 
-/usr/bin/java -jar "${WORK}/odasa/tools/lgtm-buildtools/lgtmbuild.jar" "${WORK}/odasa/tools/lgtm-buildtools" "${WORK}/${PROJECT_NAME}" `pwd` "${LANGUAGE}"
+/usr/bin/java -jar "${WORK}/odasa/tools/lgtm-buildtools/lgtmbuild.jar" "${WORK}/odasa/tools/lgtm-buildtools" "${WORK}/${PROJECT_NAME}" "$SOURCE_LOCATION" "${LANGUAGE}"
 
 "${WORK}/odasa/tools/odasa" addSnapshot --source-location "$SOURCE_LOCATION" --latest --name "rev-${GITHUB_SHA}" --project "${WORK}/${PROJECT_NAME}"
 "${WORK}/odasa/tools/odasa" buildSnapshot --latest --project "${WORK}/${PROJECT_NAME}" --fail-early --ignore-errors
