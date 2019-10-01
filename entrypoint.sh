@@ -10,14 +10,16 @@ SOURCE_LOCATION="${GITHUB_WORKSPACE}/source"
 
 WORK=`/bin/mktemp -d -p .`
 chmod +x "${WORK}"
-LICENSE_DIR=`/bin/mktemp -d -p .`
 
 /usr/bin/wget -O "${WORK}/odasa.zip" "${ODASA_URL}"
-/usr/bin/wget -O "${LICENSE_DIR}/license.dat" "${ODASA_LICENSE}"
+/usr/bin/wget -O "${WORK}/license.dat" "${ODASA_LICENSE}"
 
 /usr/bin/unzip -q "${WORK}/odasa.zip" -d "${WORK}"
 
-export SEMMLE_LICENSE_DIR="${LICENSE_DIR}"
+mkdir "${WORK}/odasa/license"
+mv "${WORK}/license.dat" "${WORK}/odasa/license"
+
+#export SEMMLE_LICENSE_DIR="$WORK"
 export SEMMLE_JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk
 
 /bin/mkdir "${WORK}/${PROJECT_NAME}"
